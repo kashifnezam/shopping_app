@@ -1,41 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app/items/Items_details.dart';
 
-class Other extends StatefulWidget {
-  const Other({super.key});
+class DummyList extends StatefulWidget {
+  const DummyList({super.key});
 
   @override
-  State<Other> createState() => _OtherState();
+  State<DummyList> createState() => _DummyListState();
 }
 
 final List<Map<String, dynamic>> _allData = [
   {
     "id": 1,
-    "image": 'assets/other/hp4.jpg',
-    "offerType": "Combo Offer",
-    "discount": "Save upto 80%",
+    "image": 'assets/laptop/lap1.jpg',
+    "offerType": "Today's Deal",
+    "discount": "Upto 30% off",
   },
   {
     "id": 2,
-    "image": 'assets/other/hp1.jpg',
-    "offerType": "Sunday Sale",
-    "discount": "Upto 50% off",
+    "image": 'assets/laptop/lap2.jpg',
+    "offerType": "New Arrival",
+    "discount": "Upto 70% Save",
   },
   {
     "id": 3,
-    "image": 'assets/other/hp2.png',
-    "offerType": "Friday Discount",
-    "discount": "Friday Discount",
+    "image": 'assets/laptop/lap3.jpg',
+    "offerType": "Daily Discount",
+    "discount": "80% Discount",
   },
   {
     "id": 4,
-    "image": 'assets/other/hp3.jpg',
-    "offerType": "Maha Sale",
-    "discount": "80% + 10% Off",
+    "image": 'assets/laptop/lap4.jpg',
+    "offerType": "Sunday Off",
+    "discount": "75% Discount",
   },
 ];
 
-class _OtherState extends State<Other> {
+class _DummyListState extends State<DummyList> {
   @override
   Widget build(BuildContext context) {
     // This list holds the data for the list view

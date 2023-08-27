@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
+
 import 'package:shopping_app/items/laptop.dart';
 import 'package:shopping_app/items/mobile.dart';
 import 'package:shopping_app/items/others.dart';
 
 class Products extends StatefulWidget {
   const Products({super.key});
+  // final Function(String) textFieldCalback;
 
   @override
   State<Products> createState() => _ProductsState();
 }
 
 class _ProductsState extends State<Products> {
+  // searching boolean check
+  var _isSearch = false;
+  var searchValue = '';
   int _currInd = 0;
+  String textFieldValue = "";
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        drawer: Expanded(
-          child: Container(
-            color: Colors.amber,
-            child: const Text(
-              "Not available",
-            ),
-          ),
-        ),
-        endDrawer: const Icon(Icons.notifications),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Colors.blue.shade100,
           fixedColor: Colors.blue[800],
@@ -59,17 +57,62 @@ class _ProductsState extends State<Products> {
             ),
           ],
         ),
-        appBar: AppBar(
-          toolbarHeight: 65,
-          centerTitle: true,
-          title: const Text("Discounts"),
-          actions: const [
-            Padding(
-              padding: EdgeInsets.only(right: 18.0),
-              child: Icon(Icons.notifications),
-            )
-          ],
-        ),
+        appBar: _isSearch
+            ? AppBar(actions: [
+                Container(
+                  margin: const EdgeInsets.only(
+                    right: 23,
+                  ),
+                  width: 350,
+                  child: TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        textFieldValue = value;
+                      });
+                    },
+                    decoration: InputDecoration(
+                        prefixIcon: InkWell(
+                            onTap: () {
+                              setState(() {
+                                _isSearch = false;
+                              });
+                            },
+                            child: const Icon(Icons.arrow_back)),
+                        hintText: "Search..",
+                        suffixIcon: const Icon(Icons.search),
+                        fillColor: Colors.blue.shade100,
+                        filled: true,
+                        border: const OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(32)))),
+                  ),
+                )
+              ])
+            : AppBar(
+                leading: _isSearch
+                    ? IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.arrow_back),
+                      )
+                    : const Icon(Icons.menu),
+                toolbarHeight: 65,
+                centerTitle: true,
+                title: const Text("Discounts"),
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _isSearch = true;
+                      });
+                    },
+                    icon: const Icon(Icons.search_rounded),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 18.0, left: 18),
+                    child: Icon(Icons.notifications),
+                  ),
+                ],
+              ),
         body: Column(
           children: [
             TabBar(

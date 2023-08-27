@@ -1,13 +1,77 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_app/items/Items_details.dart';
 
-class Mobile extends StatelessWidget {
+class Mobile extends StatefulWidget {
   const Mobile({super.key});
 
   @override
+  State<Mobile> createState() => _MobileState();
+}
+
+final List<Map<String, dynamic>> _allData = [
+  {
+    "id": 1,
+    "image": 'assets/mobile/mob3.jpg',
+    "offerType": "Diwali Offer",
+    "discount":   "30% Discount",
+  },
+  {
+    "id": 2,
+    "image": 'assets/mobile/mob4.jpg',
+    "offerType": "Eid Discount",
+    "discount": "50% Discount",
+  },
+  {
+    "id": 3,
+    "image": 'assets/mobile/mob1.jpg',
+    "offerType": "Maha Sale",
+    "discount": "80% Discount",
+  },
+  {
+    "id": 4,
+    "image": 'assets/mobile/mob2.jpg',
+    "offerType": "Sunday Off",
+    "discount": "75% Discount",
+  },
+];
+
+class _MobileState extends State<Mobile> {
+  @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Container(
+    // This list holds the data for the list view
+    List<Map<String, dynamic>> _foundUsers = [];
+    @override
+    initState() {
+      // at the beginning, all users are shown
+      _foundUsers = _allData;
+      super.initState();
+    }
+
+    // This function is called whenever the text field changes
+    void _runFilter(String enteredKeyword) {
+      List<Map<String, dynamic>> results = [];
+      if (enteredKeyword.isEmpty) {
+        // if the search field is empty or only contains white-space, we'll display all users
+        results = _allData;
+      } else {
+        results = _allData
+            .where((user) => user["offerType"]
+                .toLowerCase()
+                .contains(enteredKeyword.toLowerCase()))
+            .toList();
+        // we use the toLowerCase() method to make it case-insensitive
+      }
+
+      // Refresh the UI
+      setState(() {
+        _foundUsers = results;
+      });
+    }
+
+    return ListView.builder(
+      itemCount: 4,
+      itemBuilder: (context, index) {
+        return Container(
           margin: const EdgeInsets.symmetric(vertical: 32, horizontal: 27),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -17,10 +81,10 @@ class Mobile extends StatelessWidget {
                 width: 172,
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.blue, width: 2)),
-                child: const Image(
+                child: Image(
                   fit: BoxFit.fill,
                   image: AssetImage(
-                    'assets/mobile/mob3.jpg',
+                    _allData[index]["image"],
                   ),
                 ),
               ),
@@ -30,14 +94,14 @@ class Mobile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
-                      "Diwali Offer",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                    Text(
+                      _allData[index]["offerType"],
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 22),
                     ),
-                    const Text(
-                      "30% Discount",
-                      style: TextStyle(fontSize: 19),
+                    Text(
+                      _allData[index]["discount"],
+                      style: const TextStyle(fontSize: 19),
                     ),
                     ElevatedButton(
                       style: const ButtonStyle(
@@ -45,12 +109,16 @@ class Mobile extends StatelessWidget {
                         backgroundColor: MaterialStatePropertyAll(Colors.blue),
                       ),
                       onPressed: () {
-                        // Navigator.pushReplacement(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => const Products(),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Mobile1(
+                              offer: _allData[index]["offerType"],
+                              discount: _allData[index]["discount"],
+                              offerImage: _allData[index]["image"],
+                            ),
+                          ),
+                        );
                       },
                       child: const Text(
                         "View Offer",
@@ -62,176 +130,8 @@ class Mobile extends StatelessWidget {
               )
             ],
           ),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 32, horizontal: 27),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                height: 132,
-                width: 172,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blue, width: 2)),
-                child: const Image(
-                  fit: BoxFit.fill,
-                  image: AssetImage(
-                    'assets/mobile/mob4.jpg',
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 132,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Eid Discount",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-                    ),
-                    const Text(
-                      "50% Discount",
-                      style: TextStyle(fontSize: 19),
-                    ),
-                    ElevatedButton(
-                      style: const ButtonStyle(
-                        shadowColor: MaterialStatePropertyAll(Colors.blue),
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
-                      ),
-                      onPressed: () {
-                        // Navigator.pushReplacement(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => const Products(),
-                        //   ),
-                        // );
-                      },
-                      child: const Text(
-                        "View Offer",
-                        style: TextStyle(fontSize: 19, color: Colors.white),
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 32, horizontal: 27),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                height: 132,
-                width: 172,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blue, width: 2)),
-                child: const Image(
-                  fit: BoxFit.fill,
-                  image: AssetImage(
-                    'assets/mobile/mob1.jpg',
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 132,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Maha Sale",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-                    ),
-                    const Text(
-                      "80% Discount",
-                      style: TextStyle(fontSize: 19),
-                    ),
-                    ElevatedButton(
-                      style: const ButtonStyle(
-                        shadowColor: MaterialStatePropertyAll(Colors.blue),
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
-                      ),
-                      onPressed: () {
-                        // Navigator.pushReplacement(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => const Products(),
-                        //   ),
-                        // );
-                      },
-                      child: const Text(
-                        "View Offer",
-                        style: TextStyle(fontSize: 19, color: Colors.white),
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 32, horizontal: 27),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                height: 132,
-                width: 172,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blue, width: 2)),
-                child: const Image(
-                  fit: BoxFit.fill,
-                  image: AssetImage(
-                    'assets/mobile/mob2.jpg',
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 132,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Sunday Off",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-                    ),
-                    const Text(
-                      "75% Discount",
-                      style: TextStyle(fontSize: 19),
-                    ),
-                    ElevatedButton(
-                      style: const ButtonStyle(
-                        shadowColor: MaterialStatePropertyAll(Colors.blue),
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
-                      ),
-                      onPressed: () {
-                        // Navigator.pushReplacement(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => const Products(),
-                        //   ),
-                        // );
-                      },
-                      child: const Text(
-                        "View Offer",
-                        style: TextStyle(fontSize: 19, color: Colors.white),
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
+        );
+      },
     );
   }
 }

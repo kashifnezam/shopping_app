@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Other4 extends StatefulWidget {
-  const Other4(
+class Mobile1 extends StatefulWidget {
+  const Mobile1(
       {super.key,
       required this.offer,
       required this.discount,
@@ -11,10 +11,10 @@ class Other4 extends StatefulWidget {
   final String offerImage;
 
   @override
-  State<Other4> createState() => _Other4State();
+  State<Mobile1> createState() => _Mobile1State();
 }
 
-class _Other4State extends State<Other4> {
+class _Mobile1State extends State<Mobile1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
