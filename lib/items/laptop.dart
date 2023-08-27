@@ -38,36 +38,6 @@ final List<Map<String, dynamic>> _allData = [
 class _LaptopState extends State<Laptop> {
   @override
   Widget build(BuildContext context) {
-    // This list holds the data for the list view
-    List<Map<String, dynamic>> _foundUsers = [];
-    @override
-    initState() {
-      // at the beginning, all users are shown
-      _foundUsers = _allData;
-      super.initState();
-    }
-
-    // This function is called whenever the text field changes
-    void _runFilter(String enteredKeyword) {
-      List<Map<String, dynamic>> results = [];
-      if (enteredKeyword.isEmpty) {
-        // if the search field is empty or only contains white-space, we'll display all users
-        results = _allData;
-      } else {
-        results = _allData
-            .where((user) => user["offerType"]
-                .toLowerCase()
-                .contains(enteredKeyword.toLowerCase()))
-            .toList();
-        // we use the toLowerCase() method to make it case-insensitive
-      }
-
-      // Refresh the UI
-      setState(() {
-        _foundUsers = results;
-      });
-    }
-
     return ListView.builder(
       itemCount: 4,
       itemBuilder: (context, index) {
