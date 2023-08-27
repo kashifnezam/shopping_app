@@ -1,16 +1,20 @@
-# shopping_app
+# Task: Mini Discount-Shopping App  (Using Flutter)
 
-"A new Flutter project."
+## Step1: I have created the Login UI
+  It just for Good look but only the Skip button works. 
 
-## Getting Started
+## Step2: Clicking Skip button
+  we come to the category section, I divided the category in three parts: Mobile, Laptop and Other.
 
-This project is a starting point for a Flutter application.
+## Step3: Every Product in each section is clickable 
+  By clicking "View Offer" there is another UI in which the details of the product or offer is shown there.
 
-A few resources to get you started if this is your first Flutter project:
+## Step4:(Main Part) Search Button in home screen. 
+  Searching the query will give expected results. It is working fine as If anybody gives wrong query then it shows "Data not Found".
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+Regards,
+Name: Md Kashif Nezam
+## Email: kashifnezam123@gmail.com
